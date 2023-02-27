@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Content } from "./styles";
+import { Container, Content, SubContainer } from "./styles";
 import { FaTimes, FaHome, FaBible, FaRegCalendarAlt } from "react-icons/fa";
 import { BsCalendarEvent } from "react-icons/bs";
 import { IoMdContacts } from "react-icons/io";
@@ -14,7 +14,10 @@ const Sidebar = ({ active }: any) => {
 
   return (
     <Container sidebar={active}>
-      <FaTimes onClick={closeSidebar} />
+      <SubContainer>
+        <FaTimes onClick={closeSidebar} />
+        <h2>CENV</h2>
+      </SubContainer>
       <Content>
         <SidebarItem Icon={FaHome} Text="Inicio" />
         <SidebarItem Icon={MdOutlineMenuBook} Text="Sobre" />

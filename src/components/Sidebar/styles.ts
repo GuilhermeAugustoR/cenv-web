@@ -14,16 +14,6 @@ export const Container = styled.div<OtherDataWrapperType>`
   left: ${(props) => (props.sidebar ? "0" : "-100%")};
   animation: showSidebar 0.4s;
 
-  > svg {
-    position: fixed;
-    color: white;
-    width: 30px;
-    height: 30px;
-    margin-top: 32px;
-    margin-left: 32px;
-    cursor: pointer;
-  }
-
   @keyframes showSidebar {
     from {
       opacity: 0;
@@ -35,7 +25,27 @@ export const Container = styled.div<OtherDataWrapperType>`
     }
   }
 `;
-
+export const SubContainer = styled.div`
+  display: flex;
+background: red;
+  > svg {
+    position: fixed;
+    color: white;
+    width: 30px;
+    height: 30px;
+    margin-top: 10px;
+    margin-left: 250px;
+    cursor: pointer;
+  }
+  > h2 {
+    position: fixed;
+    color: white;
+    width: 30px;
+    height: 30px;
+    margin-top: 40px;
+    margin-left: 100px;
+  }
+`;
 export const Content = styled.div`
   margin-top: 100px;
 `;
