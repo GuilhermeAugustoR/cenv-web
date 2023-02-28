@@ -1,50 +1,167 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-type OtherDataWrapperType = {
-  sidebar?: boolean;
+import { btnReset, v } from "../../styles/variable";
+
+type Sidebar = {
+  isOpen?: boolean;
 };
 
-export const Container = styled.div<OtherDataWrapperType>`
-  background-color: #171923;
-  position: fixed;
-  height: 100%;
-  top: 0px;
-  left: 0px;
-  width: 300px;
-  left: ${(props) => (props.sidebar ? "0" : "-100%")};
-  animation: showSidebar 0.4s;
+type Divider = {
+  theme?: string;
+  isActive?: boolean;
+};
 
-  @keyframes showSidebar {
-    from {
-      opacity: 0;
-      width: 0;
-    }
-    to {
-      opacity: 1;
-      width: 300px;
-    }
-  }
+export const SSidebar = styled.div<Sidebar>`
+  width: ${({ isOpen }) => (!isOpen ? `auto` : v.sidebarWidth)};
+  background: ${({ theme }) => theme.bg};
+  height: 100vh;
+  padding: ${v.lgSpacing};
+  position: relative;
 `;
-export const SubContainer = styled.div`
+
+export const SSidebarButton = styled.button<Sidebar>`
+  ${btnReset};
+  position: absolute;
+  top: ${v.xxlSpacing};
+  right: ${({ isOpen }) => (isOpen ? `-16px` : `-40px`)};
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: ${({ theme }) => theme.bg};
+  box-shadow: 0 0 4px ${({ theme }) => theme.bg3},
+    0 0 7px ${({ theme }) => theme.bg};
   display: flex;
-  > svg {
-    position: fixed;
-    color: white;
-    width: 30px;
-    height: 30px;
-    margin-top: 10px;
-    margin-left: 250px;
-    cursor: pointer;
-  }
-  > img {
-    position: fixed;
-    color: white;
-    width: 80px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transform: ${({ isOpen }) => (!isOpen ? `rotate(180deg)` : `initial`)};
+`;
+
+export const SLogo = styled.div`
+  display: flex;
+  width: fit-content;
+  margin-bottom: ${v.lgSpacing};
+  cursor: pointer;
+
+  img {
+    max-width: 80px;
     height: auto;
-    margin-top: 30px;
-    margin-left: 100px;
   }
 `;
-export const Content = styled.div`
-  margin-top: 100px;
+
+export const SSearch = styled.div`
+  display: flex;
+  background: ${({ theme }) => theme.bgAlpha};
+  border: 1px solid ${({ theme }) => theme.bg3};
+  border-radius: ${v.borderRadius};
+  input {
+    padding: 0 ${v.smSpacing};
+    font-family: inherit;
+    letter-spacing: inherit;
+    font-size: 16px;
+    width: 100%;
+    outline: none;
+    border: none;
+    color: inherit;
+    background: transparent;
+  }
+`;
+
+export const SSearchIcon = styled.button`
+  ${btnReset};
+  padding: calc(${v.mdSpacing} - 2px) ${v.mdSpacing};
+  display: flex;
+  cursor: pointer;
+
+  svg {
+    font-size: 20px;
+  }
+`;
+
+export const SDivider = styled.div<Divider>`
+  height: 1px;
+  width: 100%;
+  background: ${({ theme }) => theme.bg3};
+  margin: ${v.lgSpacing} 0;
+`;
+
+export const SLinkContainer = styled.div<Divider>`
+  background: ${({ theme, isActive }) =>
+    !isActive ? `transparent` : theme.bg3};
+  border-radius: ${v.borderRadius};
+  margin: 1px 0;
+
+  :hover {
+    box-shadow: inset 0 0 0 1px ${({ theme }) => theme.bg3};
+  }
+`;
+
+export const SLink = styled(Link)`
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  font-size: 16px;
+  padding: calc(${v.smSpacing} - 2px) 0;
+`;
+
+export const SLinkIcon = styled.div`
+  padding: ${v.smSpacing} ${v.mdSpacing};
+  display: flex;
+
+  svg {
+    font-size: 20px;
+  }
+`;
+
+export const SLinkLabel = styled.span`
+  display: block;
+  flex: 1;
+  margin-left: ${v.smSpacing};
+`;
+
+export const SLinkNotification = styled.div`
+  font-size: 14px;
+  padding: calc(${v.smSpacing} / 2) ${v.smSpacing};
+  border-radius: calc(${v.borderRadius} / 2);
+  background: ${({ theme }) => theme.primary};
+  color: white;
+
+  margin-right: ${v.mdSpacing};
+`;
+
+export const STheme = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  height: 10vh;
+`;
+export const SThemeLabel = styled.span`
+  display: block;
+  flex: 1;
+`;
+export const SThemeToggler = styled.button<Divider>`
+  ${btnReset};
+  margin: 0 auto;
+  cursor: pointer;
+  width: 36px;
+  height: 20px;
+  border-radius: 10px;
+  background: ${({ theme, isActive }) =>
+    !isActive ? theme.bg3 : theme.primary};
+
+  position: relative;
+`;
+
+export const SToggleThumb = styled.div`
+  height: 18px;
+  width: 18px;
+  position: absolute;
+  top: 1px;
+  bottom: 1px;
+  transition: 0.2s ease right;
+  right: calc(100% - 18px - 1px);
+  border-radius: 50%;
+  background: ${({ theme }) => theme.bg};
 `;
