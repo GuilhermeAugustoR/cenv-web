@@ -27,7 +27,6 @@ export const Container = styled.div<OtherDataWrapperType>`
 `;
 export const SubContainer = styled.div`
   display: flex;
-background: red;
   > svg {
     position: fixed;
     color: white;
@@ -37,12 +36,12 @@ background: red;
     margin-left: 250px;
     cursor: pointer;
   }
-  > h2 {
+  > img {
     position: fixed;
     color: white;
-    width: 30px;
-    height: 30px;
-    margin-top: 40px;
+    width: 80px;
+    height: auto;
+    margin-top: 30px;
     margin-left: 100px;
   }
 `;

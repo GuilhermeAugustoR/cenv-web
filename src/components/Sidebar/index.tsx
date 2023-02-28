@@ -4,8 +4,10 @@ import { FaTimes, FaHome, FaBible, FaRegCalendarAlt } from "react-icons/fa";
 import { BsCalendarEvent } from "react-icons/bs";
 import { IoMdContacts } from "react-icons/io";
 import { MdOutlineMenuBook } from "react-icons/md";
+import Logo from "../../assets/LogoMNVBranco.png";
 
 import SidebarItem from "./SidebarItem";
+import { Link } from "react-router-dom";
 
 const Sidebar = ({ active }: any) => {
   const closeSidebar = () => {
@@ -16,15 +18,20 @@ const Sidebar = ({ active }: any) => {
     <Container sidebar={active}>
       <SubContainer>
         <FaTimes onClick={closeSidebar} />
-        <h2>CENV</h2>
+        <img src={Logo} alt="Logo" />
       </SubContainer>
       <Content>
-        <SidebarItem Icon={FaHome} Text="Inicio" />
+        <Link to="/">
+          <SidebarItem Icon={FaHome} Text="Inicio" />
+        </Link>
         <SidebarItem Icon={MdOutlineMenuBook} Text="Sobre" />
         <SidebarItem Icon={IoMdContacts} Text="Ministerios" />
         <SidebarItem Icon={BsCalendarEvent} Text="Eventos" />
         <SidebarItem Icon={FaRegCalendarAlt} Text="Calendario" />
-        <SidebarItem Icon={FaBible} Text="Biblia" />
+
+        <Link to="/bible">
+          <SidebarItem Icon={FaBible} Text="Biblia" />
+        </Link>
       </Content>
     </Container>
   );

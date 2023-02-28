@@ -5,11 +5,12 @@ import { Container } from "./styles";
 interface ISidebarItem {
   Icon: IconType;
   Text: string;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
-const SidebarItem = ({ Icon, Text }: ISidebarItem) => {
+const SidebarItem = ({ Icon, Text, onClick }: ISidebarItem) => {
   return (
-    <Container>
+    <Container onClick={onClick}>
       <Icon />
       {Text}
     </Container>
