@@ -2,9 +2,10 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
-  width: 85%;
-  height: 80vh;
-  margin-left: 100px;
-  margin-top: -60px;
-  background: red;
+  width: 100%;
+  color: ${({ theme }) => theme.text};
+`;
+
+export const SubContainer = styled.div`
+  display: flex;
 `;

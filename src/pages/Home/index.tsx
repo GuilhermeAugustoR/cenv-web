@@ -1,10 +1,12 @@
-import React from 'react'
-import * as Styled  from './styles'
+import React from "react";
+import * as Styled from "./styles";
 
 const Home = () => {
   return (
-    <Styled.Container>Home</Styled.Container>
-  )
-}
+    <Styled.Container>
+      <Styled.SubContainer>Home</Styled.SubContainer>
+    </Styled.Container>
+  );
+};
 
-export default Home
+export default Home;

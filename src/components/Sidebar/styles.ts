@@ -20,7 +20,7 @@ export const SSidebar = styled.div<Sidebar>`
   position: relative;
 `;
 
-export const SSidebarButton = styled.button<Sidebar>`
+export const SidebarButton = styled.button<Sidebar>`
   ${btnReset};
   position: absolute;
   top: ${v.xxlSpacing};
@@ -36,9 +36,10 @@ export const SSidebarButton = styled.button<Sidebar>`
   justify-content: center;
   cursor: pointer;
   transform: ${({ isOpen }) => (!isOpen ? `rotate(180deg)` : `initial`)};
+  transition: ease 0.5s;
 `;
 
-export const SLogo = styled.div`
+export const Logo = styled.div`
   display: flex;
   width: fit-content;
   margin-bottom: ${v.lgSpacing};
@@ -50,7 +51,7 @@ export const SLogo = styled.div`
   }
 `;
 
-export const SSearch = styled.div`
+export const Search = styled.div`
   display: flex;
   background: ${({ theme }) => theme.bgAlpha};
   border: 1px solid ${({ theme }) => theme.bg3};
@@ -68,7 +69,7 @@ export const SSearch = styled.div`
   }
 `;
 
-export const SSearchIcon = styled.button`
+export const SearchIcon = styled.button`
   ${btnReset};
   padding: calc(${v.mdSpacing} - 2px) ${v.mdSpacing};
   display: flex;
@@ -79,14 +80,14 @@ export const SSearchIcon = styled.button`
   }
 `;
 
-export const SDivider = styled.div<Divider>`
+export const Divider = styled.div<Divider>`
   height: 1px;
   width: 100%;
   background: ${({ theme }) => theme.bg3};
   margin: ${v.lgSpacing} 0;
 `;
 
-export const SLinkContainer = styled.div<Divider>`
+export const LinkContainer = styled.div<Divider>`
   background: ${({ theme, isActive }) =>
     !isActive ? `transparent` : theme.bg3};
   border-radius: ${v.borderRadius};
@@ -106,7 +107,7 @@ export const SLink = styled(Link)`
   padding: calc(${v.smSpacing} - 2px) 0;
 `;
 
-export const SLinkIcon = styled.div`
+export const LinkIcon = styled.div`
   padding: ${v.smSpacing} ${v.mdSpacing};
   display: flex;
 
@@ -115,13 +116,13 @@ export const SLinkIcon = styled.div`
   }
 `;
 
-export const SLinkLabel = styled.span`
+export const LinkLabel = styled.span`
   display: block;
   flex: 1;
   margin-left: ${v.smSpacing};
 `;
 
-export const SLinkNotification = styled.div`
+export const LinkNotification = styled.div`
   font-size: 14px;
   padding: calc(${v.smSpacing} / 2) ${v.smSpacing};
   border-radius: calc(${v.borderRadius} / 2);
@@ -131,17 +132,17 @@ export const SLinkNotification = styled.div`
   margin-right: ${v.mdSpacing};
 `;
 
-export const STheme = styled.div`
+export const Theme = styled.div`
   display: flex;
   align-items: center;
   font-size: 16px;
   height: 10vh;
 `;
-export const SThemeLabel = styled.span`
+export const ThemeLabel = styled.span`
   display: block;
   flex: 1;
 `;
-export const SThemeToggler = styled.button<Divider>`
+export const ThemeToggler = styled.button<Divider>`
   ${btnReset};
   margin: 0 auto;
   cursor: pointer;
@@ -154,7 +155,7 @@ export const SThemeToggler = styled.button<Divider>`
   position: relative;
 `;
 
-export const SToggleThumb = styled.div`
+export const ToggleThumb = styled.div`
   height: 18px;
   width: 18px;
   position: absolute;

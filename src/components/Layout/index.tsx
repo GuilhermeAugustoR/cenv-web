@@ -1,13 +1,15 @@
 import React from "react";
-import { SLayout, SMain } from "./styles";
+import * as Styled from "./styles";
 import Sidebar from "../Sidebar";
 
 const Layout = ({ children }: any) => {
   return (
-    <SLayout>
+    <Styled.Layout>
       <Sidebar />
-      <SMain>{children}</SMain>
-    </SLayout>
+      <Styled.Main>
+        <Styled.Container>{children}</Styled.Container>
+      </Styled.Main>
+    </Styled.Layout>
   );
 };
 

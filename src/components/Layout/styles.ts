@@ -1,13 +1,22 @@
 import styled from "styled-components";
 import { v } from "../../styles/variable";
 
-export const SLayout = styled.div`
+export const Layout = styled.div`
   display: flex;
+  width: 98vw;
 `;
 
-export const SMain = styled.main`
+export const Main = styled.main`
   padding: calc(${v.smSpacing} * 2);
+  width: 100%;
   h1 {
     font-size: 14px;
   }
+`;
+
+export const Container = styled.div`
+  display: flex;
+  width: 100%;
+  height: 94vh;
+  margin-left: 25px;
 `;

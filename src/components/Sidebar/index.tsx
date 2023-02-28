@@ -1,30 +1,23 @@
 import React, { useContext, useRef, useState } from "react";
 import {
-  SDivider,
+  Divider,
   SLink,
-  SLinkContainer,
-  SLinkIcon,
-  SLinkLabel,
-  SLogo,
-  SSearch,
-  SSearchIcon,
+  LinkContainer,
+  LinkIcon,
+  LinkLabel,
+  Logo,
   SSidebar,
-  SSidebarButton,
-  STheme,
-  SThemeLabel,
-  SThemeToggler,
-  SToggleThumb,
+  SidebarButton,
+  Theme,
+  ThemeLabel,
+  ThemeToggler,
+  ToggleThumb,
 } from "./styles";
 
 import logoBranca from "../../assets/LogoMNVBranco.png";
 import logoPreta from "../../assets/LogoMNVPreto.png";
 
-import {
-  AiOutlineHome,
-  AiOutlineLeft,
-  AiOutlineSearch,
-  AiOutlineSetting,
-} from "react-icons/ai";
+import { AiOutlineHome, AiOutlineLeft, AiOutlineSetting } from "react-icons/ai";
 import { MdLogout } from "react-icons/md";
 import { FaRegCalendarAlt, FaBible } from "react-icons/fa";
 import { BsCalendarEvent } from "react-icons/bs";
@@ -37,6 +30,7 @@ import { ThemeContext } from "../../App";
 const Sidebar = () => {
   const searchRef: any = useRef(null);
   const { setTheme, theme }: any = useContext(ThemeContext);
+  const [themeLocal, setThemeLocal] = useState<string | null>();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { pathname } = useLocation();
 
@@ -52,16 +46,16 @@ const Sidebar = () => {
   return (
     <SSidebar isOpen={sidebarOpen}>
       <>
-        <SSidebarButton
+        <SidebarButton
           isOpen={sidebarOpen}
           onClick={() => setSidebarOpen((p) => !p)}
         >
           <AiOutlineLeft />
-        </SSidebarButton>
+        </SidebarButton>
       </>
-      <SLogo>
+      <Logo>
         <img src={theme === "dark" ? logoBranca : logoPreta} alt="logo" />
-      </SLogo>
+      </Logo>
       {/* <SSearch
         onClick={searchClickHandler}
         style={!sidebarOpen ? { width: `fit-content` } : {}}
@@ -75,14 +69,14 @@ const Sidebar = () => {
           style={!sidebarOpen ? { width: 0, padding: 0 } : {}}
         />
       </SSearch> */}
-      <SDivider />
+      <Divider />
       {linksArray.map(({ icon, label, to }) => (
-        <SLinkContainer key={label} isActive={pathname === to}>
+        <LinkContainer key={label} isActive={pathname === to}>
           <SLink to={to} style={!sidebarOpen ? { width: `fit-content` } : {}}>
-            <SLinkIcon>{icon}</SLinkIcon>
+            <LinkIcon>{icon}</LinkIcon>
             {sidebarOpen && (
               <>
-                <SLinkLabel>{label}</SLinkLabel>
+                <LinkLabel>{label}</LinkLabel>
                 {/* if notifications are at 0 or null, do not display */}
                 {/* {!!notification && (
                   <SLinkNotification>{notification}</SLinkNotification>
@@ -90,33 +84,34 @@ const Sidebar = () => {
               </>
             )}
           </SLink>
-        </SLinkContainer>
+        </LinkContainer>
       ))}
 
-      <SDivider />
-      
+      <Divider />
+
       {secondaryLinksArray.map(({ icon, label }) => (
-        <SLinkContainer key={label}>
+        <LinkContainer key={label}>
           <SLink to="/" style={!sidebarOpen ? { width: `fit-content` } : {}}>
-            <SLinkIcon>{icon}</SLinkIcon>
-            {sidebarOpen && <SLinkLabel>{label}</SLinkLabel>}
+            <LinkIcon>{icon}</LinkIcon>
+            {sidebarOpen && <LinkLabel>{label}</LinkLabel>}
           </SLink>
-        </SLinkContainer>
+        </LinkContainer>
       ))}
 
-      <SDivider />
-      
-      <STheme>
-        {sidebarOpen && <SThemeLabel>Dark Mode</SThemeLabel>}
-        <SThemeToggler
+      <Divider />
+
+      <Theme>
+        {sidebarOpen && <ThemeLabel>Dark Mode</ThemeLabel>}
+        <ThemeToggler
           isActive={theme === "dark"}
           onClick={() => {
             setTheme((p: string) => (p === "light" ? "dark" : "light"));
+            localStorage.setItem("@theme", JSON.stringify(theme));
           }}
         >
-          <SToggleThumb style={theme === "dark" ? { right: "1px" } : {}} />:
-        </SThemeToggler>
-      </STheme>
+          <ToggleThumb style={theme === "dark" ? { right: "1px" } : {}} />:
+        </ThemeToggler>
+      </Theme>
     </SSidebar>
   );
 };
