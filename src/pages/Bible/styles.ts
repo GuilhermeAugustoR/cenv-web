@@ -6,6 +6,6 @@ export const Container = styled.div`
   color: ${({ theme }) => theme.text};
 `;
 
-export const SubContainer = styled.div`
+export const ContainerBible = styled.div`
   display: flex;
 `;
