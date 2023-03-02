@@ -1,5 +1,5 @@
 /* eslint-disable no-lone-blocks */
-import React from "react";
+import React, { ReactElement } from "react";
 import * as Styled from "./styles";
 import bibleService from "../../services/bibleService";
 
@@ -23,16 +23,13 @@ const Bible = () => {
 
   const mapCap = React.useMemo(() => {
     return cap.map((props: any, index: React.Key | null | undefined) => (
-      <Styled.ContainerCap key={index}>{props.name}</Styled.ContainerCap>
+      <Styled.ContainerBooks key={index}>
+        <button>{props.name}</button>
+      </Styled.ContainerBooks>
     ));
   }, [cap]);
 
-  return (
-    <Styled.Container>
-      {/* {mapBooks} */}
-      {mapCap}
-    </Styled.Container>
-  );
+  return <Styled.Container>{mapCap}</Styled.Container>;
 };
 
 export default Bible;
