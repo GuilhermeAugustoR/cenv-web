@@ -1,10 +1,11 @@
+/* eslint-disable import/no-anonymous-default-export */
 import axios from "axios";
 import api from "./api";
 
 class BibleService {
   async getBooks() {
     try {
-      const response = await api.get(`books`);
+      const response = await api.get("books");
       return response.data;
     } catch (error: any) {
       if (axios.isAxiosError(error)) {

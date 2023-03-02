@@ -1,40 +1,35 @@
 /* eslint-disable no-lone-blocks */
 import React from "react";
 import * as Styled from "./styles";
-import { bible } from "./bible";
+import bibleService from "../../services/bibleService";
 
 const Bible = () => {
-  const [cap, setCap] = React.useState<string>("");
-  const [capIndex, setCapIndex] = React.useState<number>(0);
+  const [cap, setCap] = React.useState<any>([]);
 
-  const mapBooks = React.useMemo(() => {
-    return bible.map(({ id, nome }, index): any => (
-      <Styled.ContainerBooks key={id}>
-        <button
-          onClick={() => {
-            setCap(nome);
-            setCapIndex(index + 1);
-          }}
-        >
-          {index + 1} - {nome}
-        </button>
-      </Styled.ContainerBooks>
-    ));
+  React.useEffect(() => {
+    const getBooks = async () => {
+      try {
+        const result = await bibleService.getBooks();
+
+        setCap(result);
+        console.log(result);
+      } catch (error) {
+        console.log(error);
+        return;
+      }
+    };
+    getBooks();
   }, []);
 
   const mapCap = React.useMemo(() => {
-    return bible.map(({ capitulos }, index): any => (
-      <Styled.ContainerCap key={index}>
-        {`${index + 1} - ${capitulos[capIndex]}`}
-      </Styled.ContainerCap>
+    return cap.map((props: any, index: React.Key | null | undefined) => (
+      <Styled.ContainerCap key={index}>{props.name}</Styled.ContainerCap>
     ));
-  }, [capIndex]);
-
-  console.log(capIndex);
+  }, [cap]);
 
   return (
     <Styled.Container>
-      {mapBooks}
+      {/* {mapBooks} */}
       {mapCap}
     </Styled.Container>
   );
