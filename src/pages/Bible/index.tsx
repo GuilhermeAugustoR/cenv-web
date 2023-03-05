@@ -1,11 +1,12 @@
 /* eslint-disable no-lone-blocks */
-import React, { ReactElement } from "react";
+import React from "react";
 import * as Styled from "./styles";
 import bibleService from "../../services/bibleService";
 
 const Bible = () => {
   const [cap, setCap] = React.useState<any>([]);
   const [chapter, setChapter] = React.useState<any>(0);
+  const [chapterNumber, setChapterNumber] = React.useState<number>(0);
   const [book, setBook] = React.useState<any>([]);
   const [abrev, setAbrev] = React.useState<string>("");
 
@@ -27,9 +28,22 @@ const Bible = () => {
     const getBook = async () => {
       try {
         const result = await bibleService.getBook({ abrev });
+        let total = [];
 
-        setBook(result);
-        setChapter(result.chapters);
+        for (let i = 0; i < result.chapters; i++) {
+          total.push(
+            <button
+              value={i + 1}
+              onClick={() => {
+                setChapterNumber(i + 1);
+              }}
+            >
+              {i + 1}
+            </button>
+          );
+        }
+
+        setChapter(total);
       } catch (error) {
         console.log(error);
         return;
@@ -55,10 +69,7 @@ const Bible = () => {
   return (
     <Styled.Container>
       {abrev ? (
-        <div>
-          {book.author}
-          {chapter}
-        </div>
+        <Styled.ContainerChapterNumber>{chapter}</Styled.ContainerChapterNumber>
       ) : (
         mapCap
       )}
