@@ -109,11 +109,9 @@ const Bible = () => {
 
   if (isTotalChapter) {
     return (
-      <Styled.Container>
-        <Styled.ContainerChapterNumber>
-          {totalChapter}
-        </Styled.ContainerChapterNumber>
-      </Styled.Container>
+      <Styled.ContainerChapterNumber>
+        {totalChapter}
+      </Styled.ContainerChapterNumber>
     );
   }
 

@@ -18,6 +18,8 @@ export const SSidebar = styled.div<Sidebar>`
   height: 100vh;
   padding: ${v.lgSpacing};
   position: relative;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
 `;
 
 export const SidebarButton = styled.button<Sidebar>`

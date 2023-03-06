@@ -24,7 +24,7 @@ import { BsCalendarEvent } from "react-icons/bs";
 import { IoMdContacts } from "react-icons/io";
 import { MdOutlineMenuBook } from "react-icons/md";
 
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { ThemeContext } from "../../App";
 
 const Sidebar = () => {
@@ -54,7 +54,9 @@ const Sidebar = () => {
         </SidebarButton>
       </>
       <Logo>
-        <img src={theme === "dark" ? logoBranca : logoPreta} alt="logo" />
+        <Link to="/">
+          <img src={theme === "dark" ? logoBranca : logoPreta} alt="logo" />
+        </Link>
       </Logo>
       {/* <SSearch
         onClick={searchClickHandler}

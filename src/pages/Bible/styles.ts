@@ -6,10 +6,16 @@ export const Container = styled.div`
   grid-template-columns: repeat(4, 1fr);
   grid-column-gap: 20px;
   grid-row-gap: 0.4rem;
-  width: 100%;
   color: ${({ theme }) => theme.text};
   margin-left: 30px;
   align-items: center;
+  width: 100%;
+  height: 95vh;
+
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   @media ${device.laptopL} {
     grid-template-columns: repeat(3, 1fr);
@@ -67,6 +73,12 @@ export const ContainerChapterNumber = styled.div`
   grid-row-gap: 1.5rem;
   color: ${({ theme }) => theme.text};
   width: 100%;
+  height: 95vh;
+
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   > button {
     display: flex;
@@ -74,7 +86,7 @@ export const ContainerChapterNumber = styled.div`
     align-self: center;
     text-align: center;
     justify-content: center;
-    padding: 20px 50px;
+    padding: 15px 40px;
     font-size: 26px;
     color: ${({ theme }) => theme.text};
     background: transparent;
@@ -83,6 +95,10 @@ export const ContainerChapterNumber = styled.div`
     cursor: pointer;
     &:hover {
       text-decoration: underline;
+    }
+
+    @media ${device.laptopL} {
+      padding: 20px 50px;
     }
   }
 
@@ -94,19 +110,18 @@ export const ContainerChapterNumber = styled.div`
 `;
 
 export const ContainerChapter = styled.div`
+  width: 100%;
   height: 95vh;
-  overflow: auto;
+  line-height: 50px;
+
+  overflow: scroll;
   &::-webkit-scrollbar {
-    width: 0px;
-    border: none;
-    background: none;
+    display: none;
   }
 `;
 
 export const SubContainerChapter = styled.div`
   display: flex;
-  width: 100%;
-  line-height: 50px;
 
   > span {
     display: flex;
