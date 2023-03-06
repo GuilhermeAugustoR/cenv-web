@@ -50,7 +50,7 @@ const Sidebar = () => {
   }, [theme]);
 
   React.useEffect(() => {
-    if (theme === "dark") {
+    if (sessionStorage.getItem("@theme") === "dark") {
       setLogo(logoBranca);
     } else setLogo(logoPreta);
   }, [setLogo, theme, logo]);

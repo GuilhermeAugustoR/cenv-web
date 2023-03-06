@@ -29,6 +29,12 @@ export const Container = styled.div`
     grid-column-gap: 70px;
     grid-row-gap: 0.7rem;
   }
+
+  @media ${device.mobileL} {
+    grid-template-columns: repeat(5, 1fr);
+    grid-column-gap: 70px;
+    grid-row-gap: 0.7rem;
+  }
 `;
 
 export const ContainerCap = styled.div`

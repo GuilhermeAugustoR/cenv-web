@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { v } from "../../styles/variable";
+import { device, v } from "../../styles/variable";
 
 export const Layout = styled.div`
   display: flex;
@@ -18,4 +18,8 @@ export const Container = styled.div`
   display: flex;
   width: 98%;
   margin-left: 40px;
+
+  @media ${device.mobileL} {
+    margin-left: 0;
+  }
 `;

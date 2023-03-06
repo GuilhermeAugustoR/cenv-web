@@ -15,7 +15,6 @@ export const GlobalStyle = createGlobalStyle`
         letter-spacing: .6px;
         
         overflow-y: hidden;
-        &::-webkit-scrollbar{
-        }
+       
     }
 `;

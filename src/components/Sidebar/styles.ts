@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import { btnReset, v } from "../../styles/variable";
+import { btnReset, device, v } from "../../styles/variable";
 
 type Sidebar = {
   isOpen?: boolean;
@@ -20,6 +20,10 @@ export const SSidebar = styled.div<Sidebar>`
   position: relative;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
+
+  @media ${device.mobileL} {
+    padding: ${v.smSpacing};
+  }
 `;
 
 export const SidebarButton = styled.button<Sidebar>`
@@ -50,6 +54,10 @@ export const Logo = styled.div`
   img {
     max-width: 80px;
     height: auto;
+
+    @media ${device.mobileL} {
+      max-width: 60px;
+    }
   }
 `;
 
