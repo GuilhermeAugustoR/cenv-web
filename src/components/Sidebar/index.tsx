@@ -109,7 +109,7 @@ const Sidebar = () => {
             localStorage.setItem("@theme", JSON.stringify(theme));
           }}
         >
-          <ToggleThumb style={theme === "dark" ? { right: "1px" } : {}} />:
+          <ToggleThumb style={theme === "dark" ? { right: "1px" } : {}} />
         </ThemeToggler>
       </Theme>
     </SSidebar>

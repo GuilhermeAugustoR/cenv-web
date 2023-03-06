@@ -64,7 +64,7 @@ export const ContainerChapterNumber = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-column-gap: 100px;
-  grid-row-gap: 1rem;
+  grid-row-gap: 1.5rem;
   color: ${({ theme }) => theme.text};
   width: 100%;
 
@@ -74,15 +74,42 @@ export const ContainerChapterNumber = styled.div`
     align-self: center;
     text-align: center;
     justify-content: center;
-    padding: 25px 50px;
+    padding: 20px 50px;
     font-size: 26px;
     color: ${({ theme }) => theme.text};
     background: transparent;
     outline: none;
-    border: none;
+    border: ${({ theme }) => `1px solid ${theme.text}`};
     cursor: pointer;
     &:hover {
       text-decoration: underline;
     }
+  }
+
+  @media ${device.laptopL} {
+    grid-template-columns: repeat(7, 1fr);
+    grid-column-gap: 80px;
+    margin-left: 20px;
+  }
+`;
+
+export const ContainerChapter = styled.div`
+  height: 95vh;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    width: 0px;
+    border: none;
+    background: none;
+  }
+`;
+
+export const SubContainerChapter = styled.div`
+  display: flex;
+  width: 100%;
+  line-height: 50px;
+
+  > span {
+    display: flex;
+    font-size: 1.1rem;
   }
 `;

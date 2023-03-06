@@ -4,10 +4,15 @@ import * as Styled from "./styles";
 import bibleService from "../../services/bibleService";
 
 const Bible = () => {
+  //Steps
+  const [isCap, setIsCap] = React.useState<boolean>(true);
+  const [isTotalChapter, setIsTotalChapter] = React.useState<boolean>(false);
+  const [isChapter, setIsChapter] = React.useState<boolean>(false);
+
   const [cap, setCap] = React.useState<any>([]);
-  const [chapter, setChapter] = React.useState<any>(0);
+  const [totalChapter, setTotalChapter] = React.useState<any>(0);
   const [chapterNumber, setChapterNumber] = React.useState<number>(0);
-  const [book, setBook] = React.useState<any>([]);
+  const [chapter, setChapter] = React.useState<any>([]);
   const [abrev, setAbrev] = React.useState<string>("");
 
   React.useEffect(() => {
@@ -36,6 +41,9 @@ const Bible = () => {
               value={i + 1}
               onClick={() => {
                 setChapterNumber(i + 1);
+                setIsChapter(true);
+                setIsTotalChapter(false);
+                setIsCap(false);
               }}
             >
               {i + 1}
@@ -43,7 +51,7 @@ const Bible = () => {
           );
         }
 
-        setChapter(total);
+        setTotalChapter(total);
       } catch (error) {
         console.log(error);
         return;
@@ -52,12 +60,41 @@ const Bible = () => {
     getBook();
   }, [abrev]);
 
+  React.useEffect(() => {
+    const getChapter = async () => {
+      try {
+        const result = await bibleService.getChapter({
+          abrev,
+          chapter: String(chapterNumber),
+        });
+
+        setChapter(result.verses);
+      } catch (error) {
+        console.log(error);
+        return;
+      }
+    };
+    getChapter();
+  }, [abrev, chapterNumber]);
+
+  const mapChapter = React.useMemo(() => {
+    return chapter.map(({ text, number }: any) => (
+      <Styled.SubContainerChapter key={number}>
+        <span>
+          {number} - {text}
+        </span>
+      </Styled.SubContainerChapter>
+    ));
+  }, [chapter]);
+
   const mapCap = React.useMemo(() => {
     return cap.map((props: any, index: React.Key | null | undefined) => (
       <Styled.ContainerBooks key={index}>
         <button
           onClick={() => {
             setAbrev(props.abbrev.pt);
+            setIsTotalChapter(true);
+            setIsCap(false);
           }}
         >
           {props.name}
@@ -66,15 +103,25 @@ const Bible = () => {
     ));
   }, [cap]);
 
-  return (
-    <Styled.Container>
-      {abrev ? (
-        <Styled.ContainerChapterNumber>{chapter}</Styled.ContainerChapterNumber>
-      ) : (
-        mapCap
-      )}
-    </Styled.Container>
-  );
+  if (isCap) {
+    return <Styled.Container>{mapCap}</Styled.Container>;
+  }
+
+  if (isTotalChapter) {
+    return (
+      <Styled.Container>
+        <Styled.ContainerChapterNumber>
+          {totalChapter}
+        </Styled.ContainerChapterNumber>
+      </Styled.Container>
+    );
+  }
+
+  if (isChapter) {
+    return <Styled.ContainerChapter>{mapChapter}</Styled.ContainerChapter>;
+  }
+
+  return <></>;
 };
 
 export default Bible;
