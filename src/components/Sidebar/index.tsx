@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useContext, useRef, useState } from "react";
 import {
   Divider,
@@ -26,11 +27,12 @@ import { MdOutlineMenuBook } from "react-icons/md";
 
 import { Link, useLocation } from "react-router-dom";
 import { ThemeContext } from "../../App";
+import { ThemesContext } from "../../context/themesContext";
 
 const Sidebar = () => {
-  const searchRef: any = useRef(null);
   const { setTheme, theme }: any = useContext(ThemeContext);
-  const [themeLocal, setThemeLocal] = useState<string | null>();
+  const searchRef: any = useRef(null);
+  const [logo, setLogo] = useState<any>();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { pathname } = useLocation();
 
@@ -42,6 +44,16 @@ const Sidebar = () => {
       // search functionality
     }
   };
+
+  React.useEffect(() => {
+    sessionStorage.setItem("@theme", theme);
+  }, [theme]);
+
+  React.useEffect(() => {
+    if (theme === "dark") {
+      setLogo(logoBranca);
+    } else setLogo(logoPreta);
+  }, [setLogo, theme, logo]);
 
   return (
     <SSidebar isOpen={sidebarOpen}>
@@ -55,7 +67,7 @@ const Sidebar = () => {
       </>
       <Logo>
         <Link to="/">
-          <img src={theme === "dark" ? logoBranca : logoPreta} alt="logo" />
+          <img src={logo} alt="logo" />
         </Link>
       </Logo>
       {/* <SSearch
@@ -108,7 +120,6 @@ const Sidebar = () => {
           isActive={theme === "dark"}
           onClick={() => {
             setTheme((p: string) => (p === "light" ? "dark" : "light"));
-            localStorage.setItem("@theme", JSON.stringify(theme));
           }}
         >
           <ToggleThumb style={theme === "dark" ? { right: "1px" } : {}} />
