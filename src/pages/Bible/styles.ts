@@ -106,11 +106,20 @@ export const ContainerChapterNumber = styled.div`
     @media ${device.laptopL} {
       padding: 20px 50px;
     }
+
+    @media ${device.laptop} {
+      padding: 20px 50px;
+    }
   }
 
   @media ${device.laptopL} {
     grid-template-columns: repeat(7, 1fr);
     grid-column-gap: 80px;
+    margin-left: 20px;
+  }
+  @media ${device.laptop} {
+    grid-template-columns: repeat(7, 1fr);
+    grid-column-gap: 10px;
     margin-left: 20px;
   }
 `;
