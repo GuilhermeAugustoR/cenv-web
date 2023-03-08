@@ -1,19 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useContext, useRef, useState } from "react";
-import {
-  Divider,
-  SLink,
-  LinkContainer,
-  LinkIcon,
-  LinkLabel,
-  Logo,
-  SSidebar,
-  SidebarButton,
-  Theme,
-  ThemeLabel,
-  ThemeToggler,
-  ToggleThumb,
-} from "./styles";
+import * as Styled from "./styles";
 
 import logoBranca from "../../assets/LogoMNVBranco.png";
 import logoPreta from "../../assets/LogoMNVPreto.png";
@@ -30,6 +17,7 @@ import { ThemeContext } from "../../App";
 import { ThemesContext } from "../../context/themesContext";
 
 const Sidebar = () => {
+  const { themeLogo }: any = useContext(ThemesContext);
   const { setTheme, theme }: any = useContext(ThemeContext);
   const searchRef: any = useRef(null);
   const [logo, setLogo] = useState<any>();
@@ -47,29 +35,34 @@ const Sidebar = () => {
 
   React.useEffect(() => {
     sessionStorage.setItem("@theme", theme);
-  }, [theme]);
+    sessionStorage.setItem("@logo", logo);
+  }, [logo, theme]);
+
+  React.useEffect(() => {
+    setLogo(themeLogo);
+  }, [themeLogo]);
 
   React.useEffect(() => {
     if (sessionStorage.getItem("@theme") === "dark") {
       setLogo(logoBranca);
     } else setLogo(logoPreta);
-  }, [setLogo, theme, logo]);
+  }, [theme, logo, setLogo]);
 
   return (
-    <SSidebar isOpen={sidebarOpen}>
+    <Styled.SSidebar isOpen={sidebarOpen}>
       <>
-        <SidebarButton
+        <Styled.SidebarButton
           isOpen={sidebarOpen}
           onClick={() => setSidebarOpen((p) => !p)}
         >
           <AiOutlineLeft />
-        </SidebarButton>
+        </Styled.SidebarButton>
       </>
-      <Logo>
+      <Styled.Logo>
         <Link to="/">
-          <img src={logo} alt="logo" />
+          <img src={logo} alt="Logo" />
         </Link>
-      </Logo>
+      </Styled.Logo>
       {/* <SSearch
         onClick={searchClickHandler}
         style={!sidebarOpen ? { width: `fit-content` } : {}}
@@ -83,49 +76,57 @@ const Sidebar = () => {
           style={!sidebarOpen ? { width: 0, padding: 0 } : {}}
         />
       </SSearch> */}
-      <Divider />
+      <Styled.Divider />
       {linksArray.map(({ icon, label, to }) => (
-        <LinkContainer key={label} isActive={pathname === to}>
-          <SLink to={to} style={!sidebarOpen ? { width: `fit-content` } : {}}>
-            <LinkIcon>{icon}</LinkIcon>
+        <Styled.LinkContainer key={label} isActive={pathname === to}>
+          <Styled.SLink
+            to={to}
+            style={!sidebarOpen ? { width: `fit-content` } : {}}
+          >
+            <Styled.LinkIcon>{icon}</Styled.LinkIcon>
             {sidebarOpen && (
               <>
-                <LinkLabel>{label}</LinkLabel>
+                <Styled.LinkLabel>{label}</Styled.LinkLabel>
                 {/* if notifications are at 0 or null, do not display */}
                 {/* {!!notification && (
                   <SLinkNotification>{notification}</SLinkNotification>
                 )} */}
               </>
             )}
-          </SLink>
-        </LinkContainer>
+          </Styled.SLink>
+        </Styled.LinkContainer>
       ))}
 
-      <Divider />
+      <Styled.Divider />
 
       {secondaryLinksArray.map(({ icon, label }) => (
-        <LinkContainer key={label}>
-          <SLink to="/" style={!sidebarOpen ? { width: `fit-content` } : {}}>
-            <LinkIcon>{icon}</LinkIcon>
-            {sidebarOpen && <LinkLabel>{label}</LinkLabel>}
-          </SLink>
-        </LinkContainer>
+        <Styled.LinkContainer key={label}>
+          <Styled.SLink
+            to="/"
+            style={!sidebarOpen ? { width: `fit-content` } : {}}
+          >
+            <Styled.LinkIcon>{icon}</Styled.LinkIcon>
+            {sidebarOpen && <Styled.LinkLabel>{label}</Styled.LinkLabel>}
+          </Styled.SLink>
+        </Styled.LinkContainer>
       ))}
 
-      <Divider />
+      <Styled.Divider />
 
-      <Theme>
-        {sidebarOpen && <ThemeLabel>Dark Mode</ThemeLabel>}
-        <ThemeToggler
+      <Styled.Theme>
+        {sidebarOpen && <Styled.ThemeLabel>Dark Mode</Styled.ThemeLabel>}
+        <Styled.ThemeToggler
           isActive={theme === "dark"}
           onClick={() => {
             setTheme((p: string) => (p === "light" ? "dark" : "light"));
           }}
         >
-          <ToggleThumb style={theme === "dark" ? { right: "1px" } : {}} />
-        </ThemeToggler>
-      </Theme>
-    </SSidebar>
+          <Styled.ToggleThumb
+            style={theme === "dark" ? { right: "1px" } : {}}
+          />
+        </Styled.ThemeToggler>
+      </Styled.Theme>
+    </Styled.SSidebar>
   );
 };
 

@@ -9,7 +9,11 @@ import ThemesContextProvider from "./context/themesContext";
 export const ThemeContext: any = React.createContext(null);
 
 function App() {
-  const [theme, setTheme] = React.useState(sessionStorage.getItem("@theme"));
+  const [theme, setTheme] = React.useState(
+    sessionStorage.getItem("@theme")
+      ? sessionStorage.getItem("@theme")
+      : "white"
+  );
   const themeStyle = theme === "light" ? lightTheme : darkTheme;
 
   return (
