@@ -2,6 +2,7 @@
 import React from "react";
 import * as Styled from "./styles";
 import bibleService from "../../services/bibleService";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 
 const Bible = () => {
   //Steps
@@ -14,6 +15,7 @@ const Bible = () => {
   const [chapterNumber, setChapterNumber] = React.useState<number>(0);
   const [chapter, setChapter] = React.useState<any>([]);
   const [abrev, setAbrev] = React.useState<string>("");
+  const [name, setName] = React.useState<string>("");
 
   React.useEffect(() => {
     const getBooks = async () => {
@@ -95,6 +97,7 @@ const Bible = () => {
             setAbrev(props.abbrev.pt);
             setIsTotalChapter(true);
             setIsCap(false);
+            setName(props.name);
           }}
         >
           {props.name}
@@ -116,7 +119,24 @@ const Bible = () => {
   }
 
   if (isChapter) {
-    return <Styled.ContainerChapter>{mapChapter}</Styled.ContainerChapter>;
+    return (
+      <Styled.ContainerChapter>
+        <Styled.ContainerChapterName>
+          <AiOutlineArrowLeft
+            size={30}
+            onClick={() => {
+              setIsChapter(false);
+              setIsTotalChapter(true);
+              setIsCap(false);
+            }}
+          />
+          <text>
+            {name} - {chapterNumber}
+          </text>
+        </Styled.ContainerChapterName>
+        {mapChapter}
+      </Styled.ContainerChapter>
+    );
   }
 
   return <></>;

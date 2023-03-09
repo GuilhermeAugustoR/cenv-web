@@ -115,7 +115,6 @@ export const ContainerChapter = styled.div`
   width: 100%;
   height: 95vh;
   line-height: 50px;
-  
 
   overflow: scroll;
   &::-webkit-scrollbar {
@@ -127,10 +126,28 @@ export const SubContainerChapter = styled.div`
   display: flex;
   width: 55%;
   margin: auto;
-  
 
   > span {
     display: flex;
     font-size: 1.1rem;
+  }
+`;
+
+export const ContainerChapterName = styled.div`
+  display: flex;
+  width: 55%;
+  margin: auto;
+  margin-bottom: 20px;
+  align-items: center;
+
+  > text {
+    display: flex;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  > svg {
+    cursor: pointer;
+   margin-right: 20px;
   }
 `;
