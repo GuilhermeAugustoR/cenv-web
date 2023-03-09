@@ -2,10 +2,9 @@ import styled from "styled-components";
 import { device } from "../../styles/variable";
 
 export const Container = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-column-gap: 20px;
-  grid-row-gap: 0.4rem;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
   color: ${({ theme }) => theme.text};
   margin-left: 30px;
   align-items: center;
@@ -18,22 +17,8 @@ export const Container = styled.div`
   }
 
   @media ${device.laptopL} {
-    grid-template-columns: repeat(3, 1fr);
-    grid-column-gap: 100px;
-    grid-row-gap: 0.55rem;
+    grid-row-gap: 1rem;
     margin-left: 50px;
-  }
-
-  @media ${device.laptop} {
-    grid-template-columns: repeat(4, 1fr);
-    grid-column-gap: 70px;
-    grid-row-gap: 0.7rem;
-  }
-
-  @media ${device.mobileL} {
-    grid-template-columns: repeat(5, 1fr);
-    grid-column-gap: 70px;
-    grid-row-gap: 0.7rem;
   }
 `;
 
@@ -69,6 +54,8 @@ export const ContainerBooks = styled.div`
   }
   @media ${device.laptop} {
     margin-left: 0px;
+    box-sizing: border-box;
+    width: calc((100% / 4) - 6rem);
   }
 `;
 
@@ -128,6 +115,7 @@ export const ContainerChapter = styled.div`
   width: 100%;
   height: 95vh;
   line-height: 50px;
+  
 
   overflow: scroll;
   &::-webkit-scrollbar {
@@ -137,6 +125,9 @@ export const ContainerChapter = styled.div`
 
 export const SubContainerChapter = styled.div`
   display: flex;
+  width: 55%;
+  margin: auto;
+  
 
   > span {
     display: flex;
