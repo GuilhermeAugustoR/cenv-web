@@ -3,6 +3,7 @@ import React from "react";
 import * as Styled from "./styles";
 import bibleService from "../../services/bibleService";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import Spinner from "../../components/Spinner";
 
 const Bible = () => {
   //Steps
@@ -10,6 +11,7 @@ const Bible = () => {
   const [isTotalChapter, setIsTotalChapter] = React.useState<boolean>(false);
   const [isChapter, setIsChapter] = React.useState<boolean>(false);
 
+  const [loading, setLoading] = React.useState<boolean>(false);
   const [cap, setCap] = React.useState<any>([]);
   const [totalChapter, setTotalChapter] = React.useState<any>(0);
   const [chapterNumber, setChapterNumber] = React.useState<number>(0);
@@ -18,12 +20,15 @@ const Bible = () => {
   const [name, setName] = React.useState<string>("");
 
   React.useEffect(() => {
+    setLoading(true);
     const getBooks = async () => {
       try {
         const result = await bibleService.getBooks();
 
+        setLoading(false);
         setCap(result);
       } catch (error) {
+        setLoading(false);
         console.log(error);
         return;
       }
@@ -32,6 +37,7 @@ const Bible = () => {
   }, []);
 
   React.useEffect(() => {
+    setLoading(true);
     const getBook = async () => {
       try {
         const result = await bibleService.getBook({ abrev });
@@ -53,8 +59,10 @@ const Bible = () => {
           );
         }
 
+        setLoading(false);
         setTotalChapter(total);
       } catch (error) {
+        setLoading(false);
         console.log(error);
         return;
       }
@@ -63,6 +71,7 @@ const Bible = () => {
   }, [abrev]);
 
   React.useEffect(() => {
+    setLoading(true);
     const getChapter = async () => {
       try {
         const result = await bibleService.getChapter({
@@ -70,8 +79,10 @@ const Bible = () => {
           chapter: String(chapterNumber),
         });
 
+        setLoading(false);
         setChapter(result.verses);
       } catch (error) {
+        setLoading(false);
         console.log(error);
         return;
       }
@@ -107,48 +118,74 @@ const Bible = () => {
   }, [cap]);
 
   if (isCapName) {
-    return <Styled.Container>{mapCap}</Styled.Container>;
+    return (
+      <>
+        {loading ? (
+          <Styled.ContainerSpinner>
+            <Spinner />
+          </Styled.ContainerSpinner>
+        ) : (
+          <Styled.Container>{mapCap}</Styled.Container>
+        )}
+      </>
+    );
   }
 
   if (isTotalChapter) {
     return (
-      <Styled.ContainerChapterNumber>
-        <Styled.AreaChapterNumber>
-          <AiOutlineArrowLeft
-            size={30}
-            onClick={() => {
-              setIsChapter(false);
-              setIsTotalChapter(false);
-              setIsCapName(true);
-            }}
-          />
-          <text>{name}</text>
-        </Styled.AreaChapterNumber>
+      <>
+        {loading ? (
+          <Styled.ContainerSpinner>
+            <Spinner />
+          </Styled.ContainerSpinner>
+        ) : (
+          <Styled.ContainerChapterNumber>
+            <Styled.AreaChapterNumber>
+              <AiOutlineArrowLeft
+                size={30}
+                onClick={() => {
+                  setIsChapter(false);
+                  setIsTotalChapter(false);
+                  setIsCapName(true);
+                }}
+              />
+              <text>{name}</text>
+            </Styled.AreaChapterNumber>
 
-        <section>{totalChapter}</section>
-      </Styled.ContainerChapterNumber>
+            <section>{totalChapter}</section>
+          </Styled.ContainerChapterNumber>
+        )}
+      </>
     );
   }
 
   if (isChapter) {
     return (
-      <Styled.ContainerChapter>
-        <Styled.ContainerChapterName>
-          <AiOutlineArrowLeft
-            size={30}
-            onClick={() => {
-              setIsChapter(false);
-              setIsTotalChapter(true);
-              setIsCapName(false);
-            }}
-          />
-          <text>
-            {name} - {chapterNumber}
-          </text>
-        </Styled.ContainerChapterName>
+      <>
+        {loading ? (
+          <Styled.ContainerSpinner>
+            <Spinner />
+          </Styled.ContainerSpinner>
+        ) : (
+          <Styled.ContainerChapter>
+            <Styled.ContainerChapterName>
+              <AiOutlineArrowLeft
+                size={30}
+                onClick={() => {
+                  setIsChapter(false);
+                  setIsTotalChapter(true);
+                  setIsCapName(false);
+                }}
+              />
+              <text>
+                {name} - {chapterNumber}
+              </text>
+            </Styled.ContainerChapterName>
 
-        {mapChapter}
-      </Styled.ContainerChapter>
+            {mapChapter}
+          </Styled.ContainerChapter>
+        )}
+      </>
     );
   }
 

@@ -181,3 +181,11 @@ export const AreaChapterNumber = styled.div`
     margin-right: 20px;
   }
 `;
+
+export const ContainerSpinner = styled.div`
+  display: flex;
+  width: 100%;
+  height: 98vh;
+  justify-content: center;
+  align-items: center;
+`;
