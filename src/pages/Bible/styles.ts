@@ -60,54 +60,61 @@ export const ContainerBooks = styled.div`
 `;
 
 export const ContainerChapterNumber = styled.div`
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-column-gap: 100px;
-  grid-row-gap: 1.5rem;
-  color: ${({ theme }) => theme.text};
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 95vh;
 
-  overflow-y: scroll;
+  overflow: scroll;
   &::-webkit-scrollbar {
     display: none;
   }
 
-  > button {
-    display: flex;
-    width: 10%;
-    align-self: center;
-    text-align: center;
-    justify-content: center;
-    padding: 15px 40px;
-    font-size: 26px;
+  > section {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-row-gap: 1rem;
     color: ${({ theme }) => theme.text};
-    background: transparent;
-    outline: none;
-    border: ${({ theme }) => `1px solid ${theme.text}`};
-    cursor: pointer;
-    &:hover {
-      text-decoration: underline;
+    width: 70%;
+    margin: 0 auto;
+
+    > button {
+      display: flex;
+      width: 10%;
+      align-self: center;
+      text-align: center;
+      justify-content: center;
+      padding: 15px 40px;
+      font-size: 26px;
+      color: ${({ theme }) => theme.text};
+      background: transparent;
+      outline: none;
+      border: ${({ theme }) => `1px solid ${theme.text}`};
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+      }
+
+      @media ${device.laptopL} {
+        padding: 20px 50px;
+      }
+
+      @media ${device.laptop} {
+        padding: 20px 50px;
+      }
     }
 
     @media ${device.laptopL} {
-      padding: 20px 50px;
+      grid-template-columns: repeat(7, 1fr);
+      grid-column-gap: 80px;
+      margin: auto;
     }
-
     @media ${device.laptop} {
-      padding: 20px 50px;
+      grid-template-columns: repeat(7, 1fr);
+      grid-column-gap: 5px;
+      width: 80%;
+      margin: 0 auto;
     }
-  }
-
-  @media ${device.laptopL} {
-    grid-template-columns: repeat(7, 1fr);
-    grid-column-gap: 80px;
-    margin-left: 20px;
-  }
-  @media ${device.laptop} {
-    grid-template-columns: repeat(7, 1fr);
-    grid-column-gap: 10px;
-    margin-left: 20px;
   }
 `;
 
@@ -148,6 +155,29 @@ export const ContainerChapterName = styled.div`
 
   > svg {
     cursor: pointer;
-   margin-right: 20px;
+    margin-right: 20px;
+  }
+`;
+
+export const AreaChapterNumber = styled.div`
+  display: flex;
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 0px;
+  align-items: center;
+
+  @media ${device.laptop} {
+    margin-bottom: 30px;
+  }
+
+  > text {
+    display: flex;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  > svg {
+    cursor: pointer;
+    margin-right: 20px;
   }
 `;

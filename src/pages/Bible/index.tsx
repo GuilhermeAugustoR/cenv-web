@@ -6,7 +6,7 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 
 const Bible = () => {
   //Steps
-  const [isCap, setIsCap] = React.useState<boolean>(true);
+  const [isCapName, setIsCapName] = React.useState<boolean>(true);
   const [isTotalChapter, setIsTotalChapter] = React.useState<boolean>(false);
   const [isChapter, setIsChapter] = React.useState<boolean>(false);
 
@@ -45,7 +45,7 @@ const Bible = () => {
                 setChapterNumber(i + 1);
                 setIsChapter(true);
                 setIsTotalChapter(false);
-                setIsCap(false);
+                setIsCapName(false);
               }}
             >
               {i + 1}
@@ -96,7 +96,7 @@ const Bible = () => {
           onClick={() => {
             setAbrev(props.abbrev.pt);
             setIsTotalChapter(true);
-            setIsCap(false);
+            setIsCapName(false);
             setName(props.name);
           }}
         >
@@ -106,14 +106,26 @@ const Bible = () => {
     ));
   }, [cap]);
 
-  if (isCap) {
+  if (isCapName) {
     return <Styled.Container>{mapCap}</Styled.Container>;
   }
 
   if (isTotalChapter) {
     return (
       <Styled.ContainerChapterNumber>
-        {totalChapter}
+        <Styled.AreaChapterNumber>
+          <AiOutlineArrowLeft
+            size={30}
+            onClick={() => {
+              setIsChapter(false);
+              setIsTotalChapter(false);
+              setIsCapName(true);
+            }}
+          />
+          <text>{name}</text>
+        </Styled.AreaChapterNumber>
+
+        <section>{totalChapter}</section>
       </Styled.ContainerChapterNumber>
     );
   }
@@ -127,13 +139,14 @@ const Bible = () => {
             onClick={() => {
               setIsChapter(false);
               setIsTotalChapter(true);
-              setIsCap(false);
+              setIsCapName(false);
             }}
           />
           <text>
             {name} - {chapterNumber}
           </text>
         </Styled.ContainerChapterName>
+
         {mapChapter}
       </Styled.ContainerChapter>
     );
